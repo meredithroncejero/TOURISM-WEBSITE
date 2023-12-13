@@ -1,0 +1,195 @@
+@page
+@model TOURISM_WEBSITE.Pages.outdoor_detailsModel
+@{
+    ViewData["Title"] = "Outdoor Details";
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/tour-details.css" />
+<link rel="stylesheet" href="~/css/tour.css" />
+<link rel="stylesheet" href="~/css/tour-responsive.css" />
+
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        margin: 0;
+        overflow-y: auto;
+        height: 100vh;
+    }
+
+    .container {
+        margin-left: 30px;
+    }
+
+    .line {
+        justify-content: center;
+    }
+
+    .details-section {
+        width: 70%;
+        padding-left: 15px;
+        background-image: url('/Images/tour-bg.jpg'); /* Updated path */
+        background-attachment: fixed;
+        background-size: cover;
+    }
+
+    .col-md-4 {
+        max-width: 30%;
+        margin-right: 40px;
+    }
+
+    .containerx {
+        margin-left: 100px;
+    }
+
+    .details-container {
+        width: 100%;
+        padding-left: 15px;
+        padding-right: 100px;
+    }
+
+    .cards {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .cardt {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        width: 80%;
+    }
+
+    .image-container {
+        margin-right: 400px;
+        width: 50%;
+    }
+
+    .cardt img {
+        max-height: 280px;
+        max-width: 100%;
+    }
+
+    .text-container {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        padding-left: 15px;
+        width: 100%;
+    }
+
+        .text-container h1,
+        .text-container p {
+            max-width: calc(100% - 30px);
+        }
+
+    .cardt p.title {
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        width: 80%;
+        text-align: justify;
+        margin-bottom: 10px;
+    }
+
+    .cardt.active p.title {
+        opacity: 1;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        height: 100vh;
+        margin: 0;
+        overflow-y: auto;
+    }
+
+    .cardt .text-container p.description {
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        width: 100%;
+        text-align: justify;
+    }
+
+    .cardt.active .text-container p.description {
+        opacity: 1;
+        display: block;
+        margin-right: 0;
+    }
+
+    .scroll-message {
+        position: fixed;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 14px;
+        color: #999;
+    }
+</style>
+
+<section class="details-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <a href="/Tours" class="btn btn-secondary btn-back">
+                    <span class="oi oi-arrow-left"></span> Back to Tours
+                </a>
+                <h1 class="dark">Go Hiking</h1>
+                <div class="line"></div>
+                <div class="containerx">
+                    <input type="radio" name="slider" id="item-1" checked />
+                    <input type="radio" name="slider" id="item-2" />
+                    <input type="radio" name="slider" id="item-3" />
+
+                    <div class="cards">
+                        <label class="cardt image-container" for="item-1" id="col-img-1">
+                            <img src="lib/images/hike.jpg" alt="Hiking Image 1" />
+                        </label>
+
+                        <label class="cardt image-container" for="item-2" id="col-img-2">
+                            <img src="lib/images/hiking2.jpg" alt="Hiking Image 2" />
+                        </label>
+
+                        <label class="cardt image-container" for="item-3" id="col-img-3">
+                            <img src="lib/images/hikng3.jpg" alt="Hiking Image 3" />
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="details-container">
+                    <h1 class="dark">Go Hiking</h1>
+                    <p class="description" id="desc-3">
+                        Experience the thrill of the Nacali Falls Adventure in San Lorenzo Ruiz. Discover cascading waterfalls, scenic landscapes, and create unforgettable memories during this exciting journey.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="scroll-message">Scroll for more</div>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var labels = document.querySelectorAll(".cardt");
+
+        labels.forEach(function (label) {
+            label.addEventListener("click", function () {
+                labels.forEach(function (otherLabel) {
+                    if (otherLabel !== label) {
+                        otherLabel.classList.remove("active");
+                    }
+                });
+
+                label.classList.toggle("active");
+
+                var description = label.querySelector(".text-container p.description");
+                description.style.display = label.classList.contains("active") ? "block" : "none";
+            });
+        });
+    });
+</script>
+
